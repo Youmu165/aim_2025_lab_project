@@ -42,10 +42,10 @@ public class SteepestDescentHC extends SATHeuristic {
 		int numberOfVariables = problem.getNumberOfVariables();
 		// TODO
 		double bestEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
-		int bestIndex = 0;
+		int bestIndex = -1;
 		boolean isImproved = false;
 		for (int i = 0; i < numberOfVariables; i++) {
-			problem.bitFlip(currentSolutionIndex, i);
+			problem.bitFlip( i);
 			double tempEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
 			if (tempEval < bestEval) {
 				bestIndex = i;
@@ -54,12 +54,12 @@ public class SteepestDescentHC extends SATHeuristic {
 
 			}
 
-			problem.bitFlip(currentSolutionIndex, i);
+			problem.bitFlip( i);
 
 		}
 		if(isImproved)
 		{
-			problem.bitFlip(currentSolutionIndex, bestIndex);
+			problem.bitFlip( bestIndex);
 		}
 		return;
 	}
