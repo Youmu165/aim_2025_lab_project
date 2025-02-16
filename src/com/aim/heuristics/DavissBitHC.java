@@ -37,7 +37,7 @@ public class DavissBitHC extends SATHeuristic {
         double bestEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
 
         int[] tempList = new int[numberOfVariables];
-        System.out.println("1. "+currentSolutionIndex +"\n" + "2. " + numberOfVariables + "\n");
+//        System.out.println("1. "+currentSolutionIndex +"\n" + "2. " + numberOfVariables + "\n");
 
         for (int j = 0; j < numberOfVariables; j++) {
             tempList[j] = j;
@@ -49,9 +49,10 @@ public class DavissBitHC extends SATHeuristic {
         for (int i = 0; i < numberOfVariables; i++) {
             problem.bitFlip(perm[i]);
             double tempEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
+//            bestEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
 
 
-            if (tempEval < bestEval) {
+            if (tempEval <= bestEval) {
                 bestEval = tempEval;
             }
             else
