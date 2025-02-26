@@ -27,9 +27,12 @@ public class RandomBitFlipHeuristic extends SATHeuristic {
 //		solution[flipIndex] = !solution[flipIndex];
 //		problem.setSolution(SINGLE_POINT_SOLUTION_INDEX, solution);
 //		problem.getObjectiveFunctionValue(SINGLE_POINT_SOLUTION_INDEX);
-		int numVariables = problem.getNumberOfVariables();
-		int flipIndex = random.nextInt(numVariables);
-		problem.bitFlip(flipIndex);
+
+//		int numVariables = problem.getNumberOfVariables();
+//		int flipIndex = random.nextInt(numVariables);
+//		problem.bitFlip(flipIndex);
+
+		problem.bitFlip(random.nextInt(problem.getNumberOfVariables()));
 	}
 
 	@Override
