@@ -2,7 +2,6 @@ package com.aim.metaheuristics.population.multimeme;
 
 import java.util.Random;
 
-import uk.ac.nott.cs.aim.domains.chesc2014_SAT.Meme;
 import uk.ac.nott.cs.aim.domains.chesc2014_SAT.SAT;
 
 /**
@@ -55,5 +54,32 @@ public class SimpleInheritanceMethod implements MemeplexInheritanceMethod {
 	public void performMemeticInheritance(int parent1Index, int parent2Index, int child1Index, int child2Index) {
 		
 		// TODO - implement the simple inheritance method as above.
+		int tempParent;
+		double inherit;
+
+		if(problem.getObjectiveFunctionValue(parent1Index) < problem.getObjectiveFunctionValue(parent2Index)) {
+			tempParent = parent1Index;
+		}
+		else if (problem.getObjectiveFunctionValue(parent1Index) > problem.getObjectiveFunctionValue(parent2Index)) {
+
+			tempParent = parent2Index;
+		}
+		else {
+			inherit = rng.nextDouble();
+			if(inherit < 0.5)
+			{
+				tempParent = parent1Index;
+			}
+			else
+			{
+				tempParent = parent2Index;
+			}
+		}
+
+		for(int i = 0; i < problem.getNumberOfMemes(); i++)
+		{
+			problem.getMeme(child1Index, i).setMemeOption(problem.getMeme(tempParent,i).getMemeOption());
+			problem.getMeme(child2Index, i).setMemeOption(problem.getMeme(tempParent,i).getMemeOption());
+		}
 	}
 }

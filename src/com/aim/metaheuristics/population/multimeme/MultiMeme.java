@@ -91,7 +91,7 @@ public class MultiMeme extends PopulationBasedSearchMethod {
 	 */
 	public void runMainLoop() {
 		
-				for(int i = 0; i < POPULATION_SIZE; i+=2) {
+		for(int i = 0; i < POPULATION_SIZE; i+=2) {
 			
 			// select two parents. we don't care if they are the same this week
 			int p1 = p1selection.parentSelection();
@@ -104,6 +104,16 @@ public class MultiMeme extends PopulationBasedSearchMethod {
 			// apply crossover
 			crossover.applyHeuristic(p1, p2, c1, c2);
 
+			inheritance.performMemeticInheritance(p1, p2, c1, c2);
+
+			performMutationOfMemeplex(c1);
+			performMutationOfMemeplex(c2);
+
+			applyMutationForChildDependentOnMeme(c1, 0);
+			applyMutationForChildDependentOnMeme(c2, 0);
+
+			applyLocalSearchForChildDependentOnMeme(c1, 1,1);
+			applyLocalSearchForChildDependentOnMeme(c2, 1,1);
 
 
 			// TODO complete the implementation of the MMA
@@ -125,6 +135,9 @@ public class MultiMeme extends PopulationBasedSearchMethod {
 		
 		// TODO implementation of mutation embedding intensity of mutation from memes
 		// ...
+		int iom = problem.getMeme(childIndex, memeIndex).getMemeOption();
+		mutation.setMutationRate(iom);
+		mutation.applyHeuristic(childIndex);
 	}
 	
 	/**
@@ -138,6 +151,8 @@ public class MultiMeme extends PopulationBasedSearchMethod {
 		
 		// TODO implementation of local search dependent on memes
 		// ...
+		int index = problem.getMeme(childIndex, operatorMemeIndex).getMemeOption();
+		lss[index].applyHeuristic(childIndex);
 	}
 
 	/**
@@ -154,6 +169,12 @@ public class MultiMeme extends PopulationBasedSearchMethod {
 		
 		// TODO implementation of mutation of memeplex
 		// ...
+		if (rng.nextDouble() >= innovationRate) {
+			return;
+		}
+
+		problem.getMeme(solutionIndex, 0).setMemeOption(rng.nextInt(5));
+		problem.getMeme(solutionIndex, 1).setMemeOption(rng.nextInt(4));
 	}
 	
 	public String toString() {
@@ -162,3 +183,4 @@ public class MultiMeme extends PopulationBasedSearchMethod {
 	}
 	
 }
+
