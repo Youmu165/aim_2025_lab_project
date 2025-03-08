@@ -28,7 +28,7 @@ public class GeometricCooling implements CoolingSchedule {
 		
 		// TODO You will need to find a suitable value for alpha 
 		//      through prior knowledge and experimentation!
-		this.dAlpha = 0.999;
+		this.dAlpha = 0.6999999999999;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class Lab4ExercisesTestFrameConfig extends TestFrameConfig {
 	 * permitted schedules = Schedule.GEOMETRIC, Schedule.LUNDY_AND_MEES Change this
 	 * to use the respective cooling schedule during experiments.
 	 */
-	protected final Schedule schedule = Schedule.LUNDY_AND_MEES;
+	protected final Schedule schedule = Schedule.GEOMETRIC;
 
 	/**
 	 * The experimental seed, set as the date the ILS lab was released.
@@ -38,7 +38,7 @@ public class Lab4ExercisesTestFrameConfig extends TestFrameConfig {
 	/*
 	 * permitted instance ID's = 1, 5
 	 */
-	protected final int INSTANCE_ID = 1;
+	protected final int INSTANCE_ID = 5;
 
 	/*
 	 * permitted run times (seconds) = 10
