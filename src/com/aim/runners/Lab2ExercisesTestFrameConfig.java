@@ -24,17 +24,17 @@ public class Lab2ExercisesTestFrameConfig extends TestFrameConfig {
 	/*
 	 * permitted instance ID's in the range [0, 11].
 	 */
-	private final int INSTANCE_ID = 11;
+	private final int INSTANCE_ID =1;
 
 	/*
 	 * permitted run times (seconds) = 1, 5, 10, 20
 	 */
-	private final int RUN_TIME =20;
+	private final int RUN_TIME =10;
 
 	/**
 	 * 
 	 */
-	private final int TRIALS_PER_TEST = 11;
+	private final int TRIALS_PER_TEST = 31;
 
 	/**
 	 * 

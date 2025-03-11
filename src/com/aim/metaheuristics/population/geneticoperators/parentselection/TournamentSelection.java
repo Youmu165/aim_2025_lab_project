@@ -8,8 +8,7 @@ import uk.ac.nott.cs.aim.domains.chesc2014_SAT.SAT;
 import uk.ac.nott.cs.aim.helperfunctions.ArrayMethods;
 
 /**
- * @author Warren G Jackson
- * @since 27/02/2025
+ * @author Warren G. Jackson
  */
 public class TournamentSelection extends ParentSelection {
 
@@ -37,17 +36,27 @@ public class TournamentSelection extends ParentSelection {
 	  * return index;
 	  */
 	public int parentSelection() {
+		
+		int bestIndex = -1;
+		double bestFitness = Double.MAX_VALUE;
+		
+		//create list of random indices
+		int[] indices = ArrayMethods.shuffle(aiParentIndices, oRandom);
 
-		int best = 0;
-		for (int i = 0; i < iTournamentSize; i++) {
-			int solution = oRandom.nextInt(iTournamentSize);
-			if(oProblem.getObjectiveFunctionValue(solution) < oProblem.getObjectiveFunctionValue(best))
-			{
-				best = solution;
+		// select from the first tournamentSize elements
+		for(int i = 0; i < iTournamentSize; i++) {
+
+			int sol = indices[i];
+			double fitness = oProblem.getObjectiveFunctionValue(sol);
+
+			// don't need to be concerned about selecting randomly from multiple best
+			// solutions as the tournamentSize parents were already randomised.
+			if(fitness < bestFitness) {
+				bestFitness = fitness;
+				bestIndex = sol;
 			}
 		}
 		
-		// TODO - study FittestSelection and RandomSelection for hints
-		return best;
+		return bestIndex;
 	}
 }

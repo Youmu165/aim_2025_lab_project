@@ -15,7 +15,7 @@ public class Lab3ExercisesTestFrameConfig extends TestFrameConfig {
 	/**
 	 * The experimental seed, set as the date this lab was released.
 	 */
-	private static final long m_parentSeed =  7022025;
+	private static final long m_parentSeed = 7022025;
 	
 	/**
 	 * permitted total runs = 31
@@ -35,12 +35,12 @@ public class Lab3ExercisesTestFrameConfig extends TestFrameConfig {
 	/**
 	 * permitted values = 0, 1, 2, 3
 	 */
-	protected final int depthOfSearch = 3;
+	protected final int depthOfSearch = 1;
 	
 	/**
 	 * permitted values = 0, 1, 2, 3
 	 */
-	protected final int intensityOfMutation = 1;
+	protected final int intensityOfMutation = 3;
 	
 	/**
 	 * 

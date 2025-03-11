@@ -7,10 +7,6 @@ import uk.ac.nott.cs.aim.domains.chesc2014_SAT.SAT;
 import uk.ac.nott.cs.aim.helperfunctions.ArrayMethods;
 import uk.ac.nott.cs.aim.satheuristics.genetics.PopulationHeuristic;
 
-/**
- * @author Warren G Jackson
- * @since 27/02/2025
- */
 public abstract class DavissBitHillClimbing extends PopulationHeuristic {
 
 	public DavissBitHillClimbing(SAT oProblem, Random oRandom) {

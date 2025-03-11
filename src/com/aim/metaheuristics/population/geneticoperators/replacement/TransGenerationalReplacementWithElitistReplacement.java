@@ -6,10 +6,6 @@ import java.util.stream.IntStream;
 import uk.ac.nott.cs.aim.domains.chesc2014_SAT.SAT;
 import uk.ac.nott.cs.aim.satheuristics.genetics.PopulationReplacement;
 
-/**
- * @author Warren G Jackson
- * @since 27/02/2025
- */
 public class TransGenerationalReplacementWithElitistReplacement extends PopulationReplacement {
 
 	/**
@@ -31,32 +27,46 @@ public class TransGenerationalReplacementWithElitistReplacement extends Populati
 	 */
 	@Override
 	protected int[] getNextGeneration(SAT oProblem, int iPopulationSize) {
-		int best = 0;
+		
+		// total population size is size of parent population plus size of offspring population
+		int iTotalPopulationSize = iPopulationSize << 1;
+		
+		// offspring indices are from 'populationSize' inclusive to 'populationSize * 2' exclusive.
+		int[] aiOffspringMemoryIndices = IntStream.range(iPopulationSize, iTotalPopulationSize).toArray();
 
-		// TODO - study BasicReplacement for hints.
-		for (int i = 0; i < iPopulationSize * 2; i++) {
-			if (oProblem.getObjectiveFunctionValue(i) < oProblem.getObjectiveFunctionValue(best)) {
-				best = i;
+		// see if the best solution is in the current population or offspring population
+		double dBestSolutionCost = Double.MAX_VALUE;
+		double dWorstOffspringCost = -Double.MAX_VALUE;
+		int bestIndex = -1;
+		int worstOffspringIndex = -1;
+		
+		// evaluate the objective function value (cost) of each solution from both parent and offspring populations
+		for(int iMemoryIndex = 0; iMemoryIndex < iTotalPopulationSize; iMemoryIndex++) {
+			
+			double dSolutionCost = oProblem.getObjectiveFunctionValue(iMemoryIndex);
+
+			// update index of the best solution, favouring offspring solutions
+			if( dSolutionCost <= dBestSolutionCost ) {
+				dBestSolutionCost = dSolutionCost;
+				bestIndex = iMemoryIndex;
+			}
+			
+			// keep track of the worst solution in the offspring population
+			if( iMemoryIndex >= iPopulationSize && dSolutionCost > dWorstOffspringCost) {
+				
+				worstOffspringIndex = iMemoryIndex;
+				dWorstOffspringCost = dSolutionCost;
 			}
 		}
-
-		int[] ret = new int[iPopulationSize];
-		for (int i = 0; i < iPopulationSize; i++) {
-			ret[i] = iPopulationSize + i;
-		}
-
-		if (best < iPopulationSize) {
-
-			int worst = iPopulationSize;
-			for (int i = iPopulationSize; i < iPopulationSize * 2; i++) {
-				if (oProblem.getObjectiveFunctionValue(i) > oProblem.getObjectiveFunctionValue(worst)) {
-					worst = i;
-				}
-			}
-
-			ret[worst - iPopulationSize] = best;
-		}
-		return ret;
+		
+		// if best solution is in parent population, replace worst in offspring with best from parents
+		if(bestIndex < iPopulationSize) { 
+			
+			aiOffspringMemoryIndices[worstOffspringIndex - iPopulationSize] = bestIndex;
+		} 
+		
+		// return array of memory locations for replacement
+		return aiOffspringMemoryIndices;
 	}
 
 }

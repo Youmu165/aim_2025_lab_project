@@ -38,31 +38,56 @@ public class SteepestDescentHC extends SATHeuristic {
 	  * @param problem The problem to be solved.
 	  */
 	public void applyHeuristic(SAT problem) {
-		int currentSolutionIndex = 0;
-		int numberOfVariables = problem.getNumberOfVariables();
-		// TODO
-		double bestEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
-		int bestIndex = -1;
-		boolean isImproved = true;
-		for (int i = 0; i < numberOfVariables; i++) {
-			problem.bitFlip( i);
-//			bestEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
-			double tempEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
-			if (tempEval <= bestEval) {
-				bestIndex = i;
-				bestEval = tempEval;
+//		int currentSolutionIndex = 0;
+//		int numberOfVariables = problem.getNumberOfVariables();
+//		// TODO
+//		double bestEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
+//		int bestIndex = -1;
+//		boolean isImproved = true;
+//		for (int i = 0; i < numberOfVariables; i++) {
+//			problem.bitFlip( i);
+////			bestEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
+//			double tempEval = problem.getObjectiveFunctionValue(currentSolutionIndex);
+//			if (tempEval <= bestEval) {
+//				bestIndex = i;
+//				bestEval = tempEval;
+//				isImproved = true;
+//
+//			}
+//
+//			problem.bitFlip( i,currentSolutionIndex);
+//
+//		}
+//		if(isImproved)
+//		{
+//			problem.bitFlip( bestIndex);
+//		}
+//		return;
+		int bestIndex = 0;
+		int currentIndex = CURRENT_SOLUTION_INDEX;
+        double currentCost =  problem.getObjectiveFunctionValue(currentIndex);
+		boolean isImproved = false;
+		double tempEval = 0;
+		for (int j = 0; j < problem.getNumberOfVariables(); j++ )
+		{
+			problem.bitFlip(j, currentIndex);
+			tempEval = problem.getObjectiveFunctionValue(currentIndex);
+
+			if(tempEval <= currentCost)
+			{
+				bestIndex = j;
+				currentCost = tempEval;
 				isImproved = true;
 
 			}
-
-			problem.bitFlip( i);
+			problem.bitFlip(j, currentIndex);
 
 		}
-		if(isImproved)
+
+		if (isImproved)
 		{
-			problem.bitFlip( bestIndex);
+			problem.bitFlip(bestIndex, currentIndex);
 		}
-		return;
 	}
 
 	public String getHeuristicName() {
