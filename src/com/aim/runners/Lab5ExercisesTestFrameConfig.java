@@ -41,7 +41,7 @@ public class Lab5ExercisesTestFrameConfig extends TestFrameConfig {
 	/*
 	 * permitted population sizes = even integers \in [4, 32]; default = 8
 	 */
-	public static final int POP_SIZE =4;
+	public static final int POP_SIZE =12;
 
 	public static final int TOURNAMENT_SIZE = 3;
 
@@ -114,7 +114,7 @@ public class Lab5ExercisesTestFrameConfig extends TestFrameConfig {
 	 */
 	public enum Mode {
 
-		GA(20000 / POP_SIZE), MA(500 / POP_SIZE);
+		GA(20000 / POP_SIZE), MA(150 / POP_SIZE);
 
 		private final int generations;
 

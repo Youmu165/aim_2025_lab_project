@@ -18,17 +18,19 @@ public class UniformXO extends CrossoverHeuristic {
 
 	public void applyHeuristic(int parent1Index, int parent2Index,
 			int child1Index, int child2Index) {
+		
+		//copy all bits to child indices
 		problem.copySolution(parent1Index, child1Index);
 		problem.copySolution(parent2Index, child2Index);
+		
+		//uniform (50/50) chance that bits of solutions will be swapped
+		for(int i = 0; i < problem.getNumberOfVariables(); i++) {
+			
+			if(random.nextDouble() < 0.5) {
 
-
-		for (int i = 0; i < problem.getNumberOfVariables(); i++)
-		{
-			if(random.nextDouble() < 0.5)
-			{
+				// here we need to use a new method `exchangeBits`
 				problem.exchangeBits(child1Index, child2Index, i);
 			}
 		}
-		// TODO - study OnePTX for hints.
 	}
 }

@@ -5,10 +5,6 @@ import uk.ac.nott.cs.aim.satheuristics.genetics.PopulationHeuristic;
 
 import java.util.Random;
 
-/**
- * @author Warren G Jackson
- * @since 27/02/2025
- */
 public abstract class SteepestDescentHillClimbing extends PopulationHeuristic {
 
 	public SteepestDescentHillClimbing(SAT problem, Random random) {

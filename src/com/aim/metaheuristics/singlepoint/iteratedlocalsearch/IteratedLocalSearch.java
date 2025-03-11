@@ -73,6 +73,7 @@ public class IteratedLocalSearch extends SinglePointSearchMethod {
 
 		double s1, s2;
 
+
 		for ( int i = 0; i < iIntensityOfMutation; i++)
 		{
 			oMutationHeuristic.applyHeuristic(problem);
@@ -85,7 +86,7 @@ public class IteratedLocalSearch extends SinglePointSearchMethod {
 		s1 = problem.getObjectiveFunctionValue(BACKUP_SOLUTION_INDEX);
 		s2 = problem.getObjectiveFunctionValue(CURRENT_SOLUTION_INDEX);
 
-		if (s2 < s1)
+		if (s2 <= s1)
 		{
 			problem.copySolution(CURRENT_SOLUTION_INDEX, BACKUP_SOLUTION_INDEX);
 		}
@@ -93,6 +94,7 @@ public class IteratedLocalSearch extends SinglePointSearchMethod {
 		{
 			problem.copySolution(BACKUP_SOLUTION_INDEX, CURRENT_SOLUTION_INDEX);
 		}
+
 
 
 
