@@ -1,6 +1,8 @@
 package com.aim.metaheuristics.singlepoint.simulatedannealing;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import com.aim.pseudorandom.RandomBitFlipHeuristic;
@@ -60,7 +62,10 @@ public class SimulatedAnnealing extends SinglePointSearchMethod {
 	 */
 	protected void runMainLoop() {
 
-		new RandomBitFlipHeuristic(random).applyHeuristic(problem);
+		RandomBitFlipHeuristic heuristic = new RandomBitFlipHeuristic(random);
+		heuristic.applyHeuristic(problem);
+
+
 		double delta = problem.getObjectiveFunctionValue(CURRENT_SOLUTION_INDEX) - problem.getObjectiveFunctionValue(BACKUP_SOLUTION_INDEX);;
 		double rnd = random.nextDouble();
 
@@ -70,9 +75,12 @@ public class SimulatedAnnealing extends SinglePointSearchMethod {
 		}
 		else
 		{
-			problem.copySolution(BACKUP_SOLUTION_INDEX, CURRENT_SOLUTION_INDEX);
+			//problem.copySolution(BACKUP_SOLUTION_INDEX, CURRENT_SOLUTION_INDEX);
+			heuristic.revertLastFlip(problem);
 		}
 		oCoolingSchedule.advanceTemperature();
+
+//		new RandomBitFlipHeuristic(random).applyHeuristic(problem);
 
 
 

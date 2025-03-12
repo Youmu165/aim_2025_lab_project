@@ -34,7 +34,7 @@ public class Lab2ExercisesTestFrameConfig extends TestFrameConfig {
 	/**
 	 * 
 	 */
-	private final int TRIALS_PER_TEST = 31;
+	private final int TRIALS_PER_TEST = 11;
 
 	/**
 	 * 

@@ -1,5 +1,7 @@
 package com.aim.pseudorandom;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import uk.ac.nott.cs.aim.domains.chesc2014_SAT.SAT;
@@ -11,6 +13,8 @@ import uk.ac.nott.cs.aim.satheuristics.SATHeuristic;
  * @author Warren G. Jackson
  */
 public class RandomBitFlipHeuristic extends SATHeuristic {
+	List<Integer> flipHistory = new ArrayList<>();
+
 
 	public RandomBitFlipHeuristic(Random random) {
 		
@@ -32,7 +36,18 @@ public class RandomBitFlipHeuristic extends SATHeuristic {
 //		int flipIndex = random.nextInt(numVariables);
 //		problem.bitFlip(flipIndex);
 
-		problem.bitFlip(random.nextInt(problem.getNumberOfVariables()));
+
+//		problem.bitFlip(random.nextInt(problem.getNumberOfVariables()));
+		int bitIndex = random.nextInt(problem.getNumberOfVariables());
+		problem.bitFlip(bitIndex, CURRENT_SOLUTION_INDEX);
+		flipHistory.add(bitIndex);
+	}
+
+	public void revertLastFlip(SAT problem) {
+		if (!flipHistory.isEmpty()) {
+			int lastBit = flipHistory.remove(flipHistory.size() - 1);
+			problem.bitFlip(lastBit, CURRENT_SOLUTION_INDEX);
+		}
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public class Lab4ExercisesTestFrameConfig extends TestFrameConfig {
 	/*
 	 * permitted instance ID's = 1, 5
 	 */
-	protected final int INSTANCE_ID = 5;
+	protected final int INSTANCE_ID = 1;
 
 	/*
 	 * permitted run times (seconds) = 10
